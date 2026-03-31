@@ -33,6 +33,30 @@ N_EPOCHS = 200
 DELTA = 1e-5
 MAX_EPS = 64.0
 
+def plot_metrics(train_loss_scores, valid_loss_scores, train_acc_scores, valid_acc_scores, version):
+
+        epochs_range = range(1, len(train_loss_scores) + 1)
+        
+        plt.figure(figsize=(8,6))
+        plt.plot(epochs_range, train_loss_scores, color='blue', label='Training loss')
+        plt.plot(epochs_range, valid_loss_scores, color='red', label='Validation loss')
+        plt.title('Training and validation loss')
+        plt.xlabel('Epochs')
+        plt.ylabel('Loss')
+        plt.legend()
+        plt.savefig(RESULTS_DIR / f"{version}-Loss-{N_EPOCHS}-{MODEL_TYPE}-{DATASET}.png")
+        plt.close()
+         
+        plt.figure(figsize=(8,6))
+        plt.plot(epochs_range, train_acc_scores, color='blue', label='Training accuracy')
+        plt.plot(epochs_range, valid_acc_scores, color='red', label='Validation accuracy')
+        plt.title('Training and validation accuracy')
+        plt.xlabel('Epochs')
+        plt.ylabel('Accuracy')
+        plt.legend()
+        plt.savefig(RESULTS_DIR / f"{version}-Accuracy-{N_EPOCHS}-{MODEL_TYPE}-{DATASET}.png")
+        plt.close()
+
 
 
 # --- BOUCLE PRINCIPALE ---
@@ -141,27 +165,7 @@ def main():
 
     # Graphiques
     if PLOT_RESULTS:
-        epochs_range = range(1, len(train_loss_scores) + 1)
-        
-        plt.figure(figsize=(8,6))
-        plt.plot(epochs_range, train_loss_scores, color='blue', label='Training loss')
-        plt.plot(epochs_range, valid_loss_scores, color='red', label='Validation loss')
-        plt.title('Training and validation loss')
-        plt.xlabel('Epochs')
-        plt.ylabel('Loss')
-        plt.legend()
-        plt.savefig(RESULTS_DIR / f"{version}-Loss-{N_EPOCHS}-{MODEL_TYPE}-{DATASET}.png")
-        plt.close()
-         
-        plt.figure(figsize=(8,6))
-        plt.plot(epochs_range, train_acc_scores, color='blue', label='Training accuracy')
-        plt.plot(epochs_range, valid_acc_scores, color='red', label='Validation accuracy')
-        plt.title('Training and validation accuracy')
-        plt.xlabel('Epochs')
-        plt.ylabel('Accuracy')
-        plt.legend()
-        plt.savefig(RESULTS_DIR / f"{version}-Accuracy-{N_EPOCHS}-{MODEL_TYPE}-{DATASET}.png")
-        plt.close()
-
+        plot_metrics(train_loss_scores, valid_loss_scores, train_acc_scores, valid_acc_scores, version)
+    
 if __name__ == "__main__":
     main()
