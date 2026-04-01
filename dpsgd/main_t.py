@@ -8,8 +8,8 @@ import time
 import matplotlib.pyplot as plt
 from pathlib import Path
 from opacus import PrivacyEngine
-from .models import DenseModel, CNNModel
-from .utils import get_dataloaders, calculate_accuracy
+from models import DenseModel, CNNModel
+from utils import get_dataloaders, calculate_accuracy
 import argparse
 
 # --- CONFIGURATION ---
